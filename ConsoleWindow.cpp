@@ -1,36 +1,28 @@
 #include "ConsoleWindow.h"
 
-ConsoleWindow::ConsoleWindow(int X, int Y)
-{
-
+ConsoleWindow::ConsoleWindow(int X, int Y){
 	std::string tamp = "mode " + std::to_string(X) + " , " + std::to_string(Y);
 	ConsoleWindow::cursor_Ymax = Y;
 	ConsoleWindow::cursor_Xmax = X;
 	system(tamp.c_str());
-
 }
 
-COORD ConsoleWindow::GetCursorPosition()
-{
-
+COORD ConsoleWindow::GetCursorPosition(){
 	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbiInfo);
 	return csbiInfo.dwCursorPosition ;
 }
 
-void ConsoleWindow::SetSizeConsoleWindow(int X, int Y)
-{
+void ConsoleWindow::SetSizeConsoleWindow(int X, int Y){
 	ConsoleWindow::cursorDefault();
 	system("cls");
 	std::string tamp = "mode " + std::to_string(X) + " , " + std::to_string(Y);
 	ConsoleWindow::cursor_Ymax = Y;
 	ConsoleWindow::cursor_Xmax = X;
-
 	system(tamp.c_str());
 }
 
-void ConsoleWindow::cursorCout(std::string text)
-{
+void ConsoleWindow::cursorCout(std::string text){
 	std::cout << text;
 	int x = text.length();
 
@@ -42,8 +34,7 @@ void ConsoleWindow::cursorCout(std::string text)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorCout(int i)
-{
+void ConsoleWindow::cursorCout(int i){
 	std::cout << i;
 	int x = std::to_string(i).length();
 	
@@ -52,11 +43,9 @@ void ConsoleWindow::cursorCout(int i)
 	CRD.Y = cursor_Y;
 	cursor_X += x;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
-
 }
 
-void ConsoleWindow::cursorCout(long int i)
-{
+void ConsoleWindow::cursorCout(long int i){
 	std::cout << i;
 	int x = std::to_string(i).length();
 
@@ -67,8 +56,7 @@ void ConsoleWindow::cursorCout(long int i)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorCout(double i , int precision )
-{
+void ConsoleWindow::cursorCout(double i , int precision ){
 	std::ostringstream ss;
 	ss << std::fixed << std::setprecision(precision) << i;
 	std::string t = ss.str();
@@ -83,8 +71,7 @@ void ConsoleWindow::cursorCout(double i , int precision )
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorDefault()
-{
+void ConsoleWindow::cursorDefault(){
 	COORD CRD;
 	CRD.X = 0;
 	CRD.Y = 0;
@@ -94,9 +81,7 @@ void ConsoleWindow::cursorDefault()
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorDefaultDown()
-{
-	
+void ConsoleWindow::cursorDefaultDown(){
 	COORD CRD;
 	CRD.X = 0;
 	CRD.Y = cursor_Ymax;
@@ -104,8 +89,7 @@ void ConsoleWindow::cursorDefaultDown()
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorToMove(int x, int y)
-{
+void ConsoleWindow::cursorToMove(int x, int y){
 	COORD CRD;
 	CRD.X = x;
 	CRD.Y = y;
@@ -125,8 +109,7 @@ void ConsoleWindow::cursorToMove(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorToMove(COORD coord)
-{
+void ConsoleWindow::cursorToMove(COORD coord){
 	cursor_X = coord.X;
 	cursor_Y = coord.Y;
 
@@ -140,11 +123,9 @@ void ConsoleWindow::cursorToMove(COORD coord)
 	}
 
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-
 }
 
-void ConsoleWindow::cursorMove(int x, int y)
-{
+void ConsoleWindow::cursorMove(int x, int y){
 	COORD CRD;
 	CRD.X = x + cursor_X;
 	CRD.Y = y + cursor_Y;
@@ -164,9 +145,7 @@ void ConsoleWindow::cursorMove(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorMove(COORD coord)
-{
-
+void ConsoleWindow::cursorMove(COORD coord){
 	coord.X = coord.X + cursor_X;
 	coord.Y = coord.Y + cursor_Y;
 
@@ -183,11 +162,9 @@ void ConsoleWindow::cursorMove(COORD coord)
 	}
 
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-
 }
 
-void ConsoleWindow::cursorMoveLin(int y)
-{
+void ConsoleWindow::cursorMoveLin(int y){
 	COORD CRD;
 	CRD.X = cursor_X;
 	CRD.Y = y + cursor_Y;
@@ -201,8 +178,7 @@ void ConsoleWindow::cursorMoveLin(int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorMoveLin(COORD coord)
-{
+void ConsoleWindow::cursorMoveLin(COORD coord){
 	COORD CRD;
 	CRD.X = cursor_X;
 	CRD.Y = coord.Y + cursor_Y;
@@ -216,8 +192,7 @@ void ConsoleWindow::cursorMoveLin(COORD coord)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorMoveCol(int x)
-{
+void ConsoleWindow::cursorMoveCol(int x){
 	COORD CRD;
 	CRD.X = x + cursor_X;
 	CRD.Y = cursor_Y;
@@ -232,8 +207,7 @@ void ConsoleWindow::cursorMoveCol(int x)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
 }
 
-void ConsoleWindow::cursorMoveCol(COORD coord)
-{
+void ConsoleWindow::cursorMoveCol(COORD coord){
 	COORD CRD;
 	CRD.X = coord.X + cursor_X;
 	CRD.Y = cursor_Y;
@@ -246,11 +220,9 @@ void ConsoleWindow::cursorMoveCol(COORD coord)
 	}
 
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), CRD);
-
 }
 
-void ConsoleWindow::clearConsole()
-{
+void ConsoleWindow::clearConsole(){
 	system("cls");
 	ConsoleWindow::cursorDefault();
 }
