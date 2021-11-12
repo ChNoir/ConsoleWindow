@@ -12,7 +12,7 @@ public:
 	
 	/// <summary>
 	/// /!\ Defini la taille maximal da la console de X colonne et Y ligne, le curseur ne poura pas depasse la limite.
-	/// Si l'envoi de caractère depase les limite de Y, la ligne 0 sera supprime et tout sera deplace de -1 Y.  
+	/// Si l'envoi de caractÃ¨re depase les limite de Y, la ligne 0 sera supprime et tout sera deplace de -1 Y.  
 	/// </summary>
 	ConsoleWindow(int X, int Y);
 
@@ -52,11 +52,7 @@ public:
 
 	/// Clear la console 
 	void clearConsole();
-
-	/// Clear la console et remet le curseur a 0
 	
-
-
 private:
 
 	int cursor_Y = 0;
